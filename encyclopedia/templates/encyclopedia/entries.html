@@ -1,0 +1,13 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ name }}
+{% endblock %}
+
+{% block body %}
+{% if exist %}
+    {{ markdown|safe }}
+{% else %}
+    <center><strong><h1>{{ name }}, does not exist</h1></strong></center>
+{% endif%}
+{% endblock %}
