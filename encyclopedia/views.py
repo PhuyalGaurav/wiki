@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from markdown2 import Markdown
 from . import util
-
+from random import choice
 markdowner = Markdown()
 
 
@@ -22,3 +22,7 @@ def entries(request, name):
             "name" : name,
             "exist" : False,
         })
+    
+def random(request):
+    page = choice(util.list_entries())
+    return entries(request, page)
