@@ -7,7 +7,13 @@
 {% block body %}
 {% if exist %}
     {{ markdown|safe }}
+    <form action="{% url 'edit' %}" method="post">
+        <input hidden name="content" type="text" value="{{ markdown }}">
+        <input type="text" hidden value="{{ name }}" name="title">
+        <button type="submit" class="btn btn-primary"style="height: 40px; width: 600px;" >Edit</button>
+    </form>
 {% else %}
     <center><strong><h1>{{ name }}, does not exist</h1></strong></center>
 {% endif%}
+
 {% endblock %}

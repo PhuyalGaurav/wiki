@@ -5,5 +5,11 @@
 {% endblock %}
 
 {% block body %}
-<h1>Error :/, Error Message : "{{ error }}"</h1>
+<center>
+<h1>{{ error }}</h1>
+<form action="{% url 'index' %}">
+    <button class="btn btn-warning">Return to home</button>
+</form>
+</center>
+
 {% endblock %}

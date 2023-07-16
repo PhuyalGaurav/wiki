@@ -1,0 +1,24 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Edit
+{% endblock %}
+
+{% block body %}
+    <h1>Edit a Page</h1>
+    <form action="{% url 'rledit2' %}" method="post">
+        <label>Title:</label>
+        <input type="text" placeholder="Title" name="title" value="{{ title }}">
+        <br>
+        <label>Md Content:</label>
+        <br>
+        <textarea name="content" id="" cols="20" rows="10" style="height: 176px;">{{ content }}</textarea>
+        <br>
+        <button type="submit" class="btn btn-primary"style="height: 40px; width: 200px;" >Edit</button>
+    </form>
+    <br>
+    <form action="{% url 'delete' %}" method="post">
+        <input type="text" hidden name="title" value="{{ title }}">
+        <button type="submit" class="btn btn-danger"style="height: 40px; width: 200px;" >Delete</button>
+    </form>
+{% endblock %}

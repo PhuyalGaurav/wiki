@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from markdown2 import Markdown
 from . import util
-from django.http import Http404
 from random import choice
-from django import forms
-from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.csrf import csrf_exempt
+from django.core.files.storage import default_storage
+
+
 
 
 
@@ -79,7 +79,52 @@ def create(request):
             return error(request, "Enter The Content")
         util.save_entry(title, content)
         return entries(request, title)
-        
-
     if request.method == "GET":
         return render(request, "encyclopedia/create.html")
+    else:
+        return error(request, "No this is not how it works bro")
+
+@csrf_exempt
+def edit(request):
+    if request.method == "POST":
+        title = request.POST['title']
+        content = request.POST['content']
+        return rledit(request, title, content)
+    else:
+        return error(request, "Please Select a page to edit")
+
+@csrf_exempt
+def rledit(request, title, content):
+    if request.method == "POST":
+        return render(request, "encyclopedia/edit.html",{
+            "title" : title,
+            "content" : util.get_entry(title)
+        })
+    else:
+        return error(request, "No this is not how it works bro")
+
+@csrf_exempt
+def rledit2(request):
+    if request.method == "POST":
+        title = request.POST['title']
+        content = request.POST['content']
+        a= []
+        for i in util.list_entries():
+            a.append(i.lower())
+        if title == "":
+            return error(request, "Enter a title")
+        elif content =="":
+            return error(request, "Enter The Content")
+        util.save_entry(title, content)
+        return entries(request, title)
+    else:
+        return error(request, "No this is not how it works bro")
+
+@csrf_exempt
+def delete(request):
+    if request.method == "POST":
+        filename = f"entries/{request.POST['title']}.md"
+        default_storage.delete(filename)
+        return error(request,"Deleted")
+    else:
+        return error(request, "No this is not how it works bro")
