@@ -1,0 +1,20 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Create
+{% endblock %}
+
+{% block body %}
+    <h1>Create a Page</h1>
+    <form action="{% url 'create' %}" method="post">
+        <label>Title:</label>
+        <input type="text" placeholder="Title" name="title">
+        <br>
+        <label>Md Content:</label>
+        <br>
+        <textarea name="content" id="" cols="20" rows="10" style="height: 176px;"></textarea>
+        <br>
+        <button type="submit" class="btn btn-primary"style="height: 40px; width: 200px;" >Create</button>
+
+    </form>
+{% endblock %}
