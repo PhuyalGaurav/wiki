@@ -1,3 +1,2 @@
 # wiki
-This is My Assignment for # CS50w.
-Project 1
+Wikipedia like site uses md for editing, No admin pannel/ user loing system. :)
